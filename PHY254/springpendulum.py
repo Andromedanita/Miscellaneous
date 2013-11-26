@@ -5,10 +5,10 @@ from numpy import *
 
 def rhs(xvector,t):
 
-	x1dot=????
-	x2dot=????	
-	x3dot=????
-	x4dot=????
+	x1dot=xvector[1]
+	x2dot=((-1.0/sigma)*xvector[0])+((1.0/sigma)*(1-sigma)*xvector[0]/(np.sqrt((xvector[0]**2)-((1-y)**2))))
+	x3dot=
+	x4dot=
 
 	return [x1dot,x2dot,x3dot,x4dot]
 
