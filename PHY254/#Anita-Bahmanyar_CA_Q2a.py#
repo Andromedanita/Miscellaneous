@@ -11,13 +11,11 @@ v=np.zeros(nt)
 theta[0]=1.0
 v[0]=1.0
 
-while i < nt-1:
 
 
-        
 
 
-#theta vs time plot
+        #theta vs time plot
 plt.plot(time,theta)
 #energy vs time plot
 plt.plot(time,energy)

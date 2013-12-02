@@ -4,15 +4,15 @@ import scipy
 
 a=0.1
 b=0.1
-c=4
+c=10
 
 a1=0.1
 b1=0.1
-c1=4
+c1=10
 
 delta_t=0.001
-time_array= np.arange(0,200,delta_t)
-time_array1= np.arange(0,200,delta_t)
+time_array= np.arange(0,50,delta_t)
+time_array1= np.arange(0,50,delta_t)
 nt=len(time_array)
 ln=np.zeros(nt)
 
@@ -52,10 +52,11 @@ while i < nt-1:
     ln[i+1]=np.log(dif[i+1])
     i+=1
     
-plt.plot(iss,ln)
-plt.title('log(abs(x1-x)) vs. R values for c=4')
-plt.xlabel('R')
+plt.plot(time_array,ln)
+plt.title('log(abs(x1-x)) vs. R values for c=10')
+plt.xlabel('time')
 plt.ylabel('log(abs(x1-x))')
+#plt.xlim(0,50)
 
 #R=np.arange(3.0,4.0,0.001)
 #npts=np.size(R)

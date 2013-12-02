@@ -8,11 +8,11 @@ nt=np.len(time)
 theta=np.zeros(nt)
 v=np.zeros(nt)
 
-theta[0]=1.0
-v[0]=1.0
+theta[0]=
+v[0]=
 
+t = 0.5*thau
 while i < nt-1:
-
 
         
 

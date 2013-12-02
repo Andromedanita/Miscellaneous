@@ -8,12 +8,14 @@ c=4
 
 a1=0.1
 b1=0.1
-c1=10
+c1=4
 
 delta_t=0.001
 time_array= np.arange(0,200,delta_t)
 time_array1= np.arange(0,200,delta_t)
 nt=len(time_array)
+ln=np.zeros(nt)
+
 
 x = np.zeros(nt)
 y =np.zeros(nt)
@@ -30,12 +32,13 @@ x[0]=10.0
 y[0]=10.0
 z[0]=10.0
 
-x1[0]=10.0001
+x1[0]=10.001
 y1[0]=10.0
 z1[0]=10.0
 
-dif[0]=0
-
+dif[0]=0.001
+ln[0]=-6.907755279
+iss=np.arange(1,nt+1,1)
 
 i=0
 while i < nt-1:
@@ -46,15 +49,39 @@ while i < nt-1:
     y1[i+1]=((x1[i]+(a1*y1[i]))*delta_t)+y1[i]
     z1[i+1]=((b1+(z1[i]*(x1[i]-c1)))*delta_t)+z1[i]
     dif[i+1]=np.abs(x1[i+1]-x[i+1])
+    ln[i+1]=np.log(dif[i+1])
     i+=1
+    
+plt.plot(iss,ln)
+plt.title('log(abs(x1-x)) vs. R values for c=4')
+plt.xlabel('R')
+plt.ylabel('log(abs(x1-x))')
 
+#R=np.arange(3.0,4.0,0.001)
+#npts=np.size(R)
 
+#lyap=np.zeros(npts)
+#x0=0.5
+#mapiter=1000
+#j=1
+'''
+while j < npts:
+    L=0
+    xn1=x0
+    for imap in range(1,mapiter):
+        xn=xn1
+        xn1=R[j]*np.log(dif)
+        if imap > 300:
+            L=L+np.log(dif)
+    lyap[j]=L/mapiter
+    j+=1
+'''
+'''
 plt.subplot(4,1,1)
-plt.plot(time_array,x,'r',label='x(t)')
-plt.plot(time_array1,x1,'b',label='x1(t)')
+plt.plot(time_array,x,'r')
+plt.plot(time_array1,x1,'b')
 plt.ylabel('x(t)')
 plt.grid('on')
-plt.legend()
 
 plt.subplot(4,1,2)
 plt.plot(time_array,y,'r')
@@ -70,10 +97,12 @@ plt.grid('on')
 
 plt.subplot(4,1,4)
 plt.plot(time_array,dif,'g')
-plt.ylabel('x(t) difference')
+plt.ylabel('difference')
 plt.grid('on')
 
 plt.suptitle('x(t) , y(t) , z(t)')
 plt.xlabel('time')
 # savefig('shm_energy_output.pdf')
+plt.plot(R,lyap)
+'''
 plt.show()

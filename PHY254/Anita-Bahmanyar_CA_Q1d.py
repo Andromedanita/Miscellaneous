@@ -7,10 +7,10 @@ b=0.1
 c=6.5
 
 delta_t=0.01
-time_array= np.arange(0,200,delta_t)
+time_array= np.arange(0,1300,delta_t)
 nt=len(time_array)
 
-loops=np.arange(4,15,1)
+loops=np.arange(4,15,0.1)
 
 x = np.zeros(nt)
 y =np.zeros(nt)
@@ -35,13 +35,13 @@ maximas=[]
 cs=[]
 
 for c in loops:
-    i=0
+    i=250
     while i < nt-1:
         x[i+1]=((-y[i]-z[i])*delta_t)+x[i]
         y[i+1]=((x[i]+(a*y[i]))*delta_t)+y[i]
         z[i+1]=((b+(z[i]*(x[i]-c)))*delta_t)+z[i]
         i+=1
-
+        
     tempmaxes=getmaxes(z,c)
     maximas.extend(tempmaxes[0])
     cs.extend(tempmaxes[1])
@@ -66,5 +66,9 @@ plt.suptitle('x(t) , y(t) , z(t)')
 plt.xlabel('time')
 # savefig('shm_energy_output.pdf')
     '''
-plt.plot(cs,maximas,'o',markersize=1.5)
+plt.plot(cs,maximas,'o',markersize=1.5,label='bifurcation diagram')
+plt.title('Bifurcation Diagram')
+plt.xlabel('c values')
+plt.ylabel('maximas')
+plt.legend(loc='best')
 plt.show()
