@@ -17,7 +17,9 @@ S_N=[]
 Noise=[]
 fflux=[]
 bbackground=[]
-'''
+averaged_list=[]
+normalized_list=[]
+
 for j in star_list:
     stars=file_name+str(j)+'.fit'
     star=pf.getdata(stars)
@@ -72,15 +74,22 @@ for j in star_list:
     total_noise_list.append(total_noise)
     signal_to_noise=poisson_noise/(np.sqrt(total_noise))
     signal_to_noise_list.append(signal_to_noise)
+    w=1./total_noise[j]
+    numerator=np.sum(w*fflux[j])
+    denominator=np.sum(w)
+    averaged=numerator/denominator
+    averaged_list.append(averaged)
+    normalized=fflux[j]/averaged_list[j]
+    normalized_list.append(normalized)
     #output1=np.column_stack((total_noise,signal_to_noise))
     #np.savetxt('properties{0}.txt'.format(j),output,fmt='%.1i')
-'''
 
 single_flux=[]
 double_flux=[]
 triple_flux=[]
 quadra_flux=[]
-#for m in range(20):
+qwe_list=[]
+
 for j in star_list:
     stars=file_name+str(j)+'.fit'
     star=pf.getdata(stars)
@@ -88,18 +97,21 @@ for j in star_list:
     ffname='/Users/anita/Documents/University_Third_Year/AST326/Lab5/fb'+str(j)+'.txt'
     flux_file=np.loadtxt(ffname,usecols=(0,))
     flux_file=flux_file[::-1]
-    single_flux.append(flux_file[0])
-    double_flux.append(flux_file[1])
-    triple_flux.append(flux_file[2])
-    quadra_flux.append(flux_file[3])
+    #single_flux.append(flux_file[0])
+    #double_flux.append(flux_file[1])
+    #triple_flux.append(flux_file[2])
+    #quadra_flux.append(flux_file[3])
+    qwe=normalized_list[j][0]
+    qwe_list.append(qwe)
                        
 time_array=np.linspace(2455704.4993055,2455704.6843287,364)
 #plt.subplot(4,5,m)
-plt.plot(time_array,single_flux,'b.')
-plt.plot(time_array,double_flux,'m.')
-plt.plot(time_array,triple_flux,'r.')
-plt.plot(time_array,quadra_flux,'g.')
+plt.plot(time_array,qwe_list,'b.')
+#plt.plot(time_array,double_flux,'m.')
+#plt.plot(time_array,triple_flux,'r.')
+#plt.plot(time_array,quadra_flux,'g.')
 plt.show()
+
 
 
 
